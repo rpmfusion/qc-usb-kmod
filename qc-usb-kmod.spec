@@ -3,11 +3,11 @@
 # "buildforkernels newest" macro for just that build; immediately after
 # queuing that build enable the macro again for subsequent builds; that way
 # a new akmod package will only get build when a new one is actually needed
-#define buildforkernels newest
+%define buildforkernels current
 
 Name:           qc-usb-kmod
 Version:        0.6.6
-Release:        41%{?dist}.1
+Release:        42%{?dist}
 Summary:        qc-usb kernel modules
 
 Group:          System Environment/Kernel
@@ -17,12 +17,12 @@ Source0:        http://downloads.sourceforge.net/qce-ga/qc-usb-%{version}.tar.gz
 Patch0:         qc-usb-0.6.6-2.6.24.patch
 # from http://patch-tracking.debian.net/patch/series/view/qc-usb/0.6.6-6/kcompat-2.6.26.patch
 Patch1:         qc-usb-0.6.6-2.6.26.patch
+# this comes from mandriva package
+Patch2:         qc-usb-0.6.6-2.6.27.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # needed for plague to make sure it builds for i586 and i686
-ExclusiveArch:  i586 i686 x86_64
-# ppc and ppc64 disabled by knurd on 20081003 as it is known to fail on 2.6.27: 
-# https://bugzilla.redhat.com/show_bug.cgi?id=465486
+ExclusiveArch:  i586 i686 x86_64 ppc ppc64
 
 # get the needed BuildRequires (in parts depending on what we build for)
 BuildRequires:  %{_bindir}/kmodtool
@@ -44,6 +44,7 @@ kmodtool  --target %{_target_cpu} --repo rpmfusion --kmodname %{name} %{?buildfo
 %setup -q -c -T -a 0
 %patch0 -p0 -b .2.6.24
 %patch1 -p0 -b .2.6.26
+%patch2 -p0 -b .2.6.27
 for kernel_version in %{?kernel_versions}; do
     cp -a  qc-usb-%{version} _kmod_build_${kernel_version%%___*}
 done
@@ -69,6 +70,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 15 2008 Lubomir Rintel <lkundrak@v3.sk> - 0.6.6-42
+- Re-enable ppc
+- Add 2.6.27 patch
+
 * Fri Oct 03 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 0.6.6-41.1
 - rebuild for rpm fusion
 
