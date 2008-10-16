@@ -3,7 +3,7 @@
 # "buildforkernels newest" macro for just that build; immediately after
 # queuing that build enable the macro again for subsequent builds; that way
 # a new akmod package will only get build when a new one is actually needed
-%define buildforkernels current
+%define buildforkernels newest
 
 Name:           qc-usb-kmod
 Version:        0.6.6
@@ -22,7 +22,9 @@ Patch2:         qc-usb-0.6.6-2.6.27.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # needed for plague to make sure it builds for i586 and i686
-ExclusiveArch:  i586 i686 x86_64 ppc ppc64
+ExclusiveArch:  i586 i686 x86_64
+# ppc and ppc64 disabled by knurd on 20081003 as it is known to fail on 2.6.27: 
+# https://bugzilla.redhat.com/show_bug.cgi?id=465486
 
 # get the needed BuildRequires (in parts depending on what we build for)
 BuildRequires:  %{_bindir}/kmodtool
@@ -71,7 +73,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %changelog
 * Wed Oct 15 2008 Lubomir Rintel <lkundrak@v3.sk> - 0.6.6-42
-- Re-enable ppc
 - Add 2.6.27 patch
 
 * Fri Oct 03 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 0.6.6-41.1
