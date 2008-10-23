@@ -7,7 +7,7 @@
 
 Name:           qc-usb-kmod
 Version:        0.6.6
-Release:        41%{?dist}.1
+Release:        41%{?dist}.2
 Summary:        qc-usb kernel modules
 
 Group:          System Environment/Kernel
@@ -20,9 +20,7 @@ Patch1:         qc-usb-0.6.6-2.6.26.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # needed for plague to make sure it builds for i586 and i686
-ExclusiveArch:  i586 i686 x86_64 ppc64
-# ppc disabled by knurd on 20081003 as it is known to fail on 2.6.26: 
-# https://bugzilla.redhat.com/show_bug.cgi?id=464613
+ExclusiveArch:  i586 i686 x86_64 ppc ppc64
 
 # get the needed BuildRequires (in parts depending on what we build for)
 BuildRequires:  %{_bindir}/kmodtool
@@ -69,6 +67,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Oct 23 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 0.6.6-41.2
+- rebuild for latest kernel; enable ppc again
+
 * Fri Oct 03 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 0.6.6-41.1
 - rebuild for rpm fusion
 
