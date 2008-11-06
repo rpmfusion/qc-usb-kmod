@@ -7,7 +7,7 @@
 
 Name:           qc-usb-kmod
 Version:        0.6.6
-Release:        41%{?dist}.3
+Release:        42%{?dist}.1
 Summary:        qc-usb kernel modules
 
 Group:          System Environment/Kernel
@@ -17,6 +17,8 @@ Source0:        http://downloads.sourceforge.net/qce-ga/qc-usb-%{version}.tar.gz
 Patch0:         qc-usb-0.6.6-2.6.24.patch
 # from http://patch-tracking.debian.net/patch/series/view/qc-usb/0.6.6-6/kcompat-2.6.26.patch
 Patch1:         qc-usb-0.6.6-2.6.26.patch
+# this comes from mandriva package
+Patch2:         qc-usb-0.6.6-2.6.27.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # needed for plague to make sure it builds for i586 and i686
@@ -42,6 +44,7 @@ kmodtool  --target %{_target_cpu} --repo rpmfusion --kmodname %{name} %{?buildfo
 %setup -q -c -T -a 0
 %patch0 -p0 -b .2.6.24
 %patch1 -p0 -b .2.6.26
+%patch2 -p0 -b .2.6.27
 for kernel_version in %{?kernel_versions}; do
     cp -a  qc-usb-%{version} _kmod_build_${kernel_version%%___*}
 done
@@ -67,6 +70,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Nov 06 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 0.6.6-42
+- Add 2.6.27 patch
+
 * Thu Nov 06 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 0.6.6-41.3
 - rebuild for latest Fedora kernel;
 
