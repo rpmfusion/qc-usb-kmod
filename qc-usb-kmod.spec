@@ -3,11 +3,11 @@
 # "buildforkernels newest" macro for just that build; immediately after
 # queuing that build enable the macro again for subsequent builds; that way
 # a new akmod package will only get build when a new one is actually needed
-#define buildforkernels newest
+%define buildforkernels newest
 
 Name:           qc-usb-kmod
 Version:        0.6.6
-Release:        42%{?dist}.2
+Release:        42%{?dist}.3
 Summary:        qc-usb kernel modules
 
 Group:          System Environment/Kernel
@@ -70,6 +70,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Nov 12 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 0.6.6-42.3
+- rebuild for latest Fedora kernel;
+
 * Fri Nov 07 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 0.6.6-42.2
 - rebuild for latest Fedora kernel;
 
