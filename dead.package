@@ -1,0 +1,2 @@
+use gspca_stv06xx instead, which Hans de Goede takes care of in Fedora's kernels until it's upstream
+See also: https://bugzilla.rpmfusion.org/show_bug.cgi?id=259#c1
