@@ -7,7 +7,7 @@
 
 Name:           qc-usb-kmod
 Version:        0.6.6
-Release:        42%{?dist}.25
+Release:        42%{?dist}.26
 Summary:        qc-usb kernel modules
 
 Group:          System Environment/Kernel
@@ -70,6 +70,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Aug 22 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 0.6.6-42.26
+- rebuild for new kernels
+
 * Sat Aug 15 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 0.6.6-42.25
 - rebuild for new kernels
 
